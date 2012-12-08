@@ -8,10 +8,10 @@ ini_set('display_errors', 1);
 
 
 function render($template, $data) {
-	$data['_links'] = [
+	$data['_links'] = array(
 		'index' => 'Home',
-		
-	];
+
+	);
 
 	require_once("../templates/header.php");
 	require_once("../templates/" . $template . ".php");
