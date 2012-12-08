@@ -113,3 +113,6 @@ def run_tests():
 
 	# ingroup_set
 	assert list_of_set(cm.ingroup_set()) == ['B', 'C'], "ingroup should be B and C"
+
+	# also test whether it doesn't blow up when faced with lots of comment lines
+	cm = charmatrix('data/oryzos.txt')
