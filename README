@@ -119,8 +119,13 @@ The program comprises the following code files:
 - nni.py -- Implementation of NNI. 
 - parallel_search.py -- Class used for communication between different MPI
   processes to exchange trees.
+- run_tests.py -- Runs unit tests on modules that have them.
+- serial_util.py -- Provides a utility function for timing the execution of
+  pieces of code.
 - spr.py -- Implementation of SPR.
 - tbr.py -- Implementation of TBR.
 - tree.py -- Implementation of trees as immutable, recursive data structures.
 - tree_parse.py -- Parser that parses a string of the form "(1,(2,3))", used
   for MPI communication, into a tree object.
+
+3. Performance.

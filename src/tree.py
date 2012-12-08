@@ -193,6 +193,10 @@ def best(trees, cm):
 			best_trees.append(tree)
 	return best_trees, best_length
 
+def best_n(trees, n, cm):
+	sorted_list = sorted(trees, cmp=lambda t1, t2: t1.length(cm) < t2.length(cm))
+	return sorted_list[0:n]
+
 def one_best(trees, cm):
 	best_trees, length = best(trees, cm)
 	return best_trees[0]

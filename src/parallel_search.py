@@ -58,14 +58,11 @@ class communicator(object):
 		# first, receive all the trees
 		trees = set(t)
 		for i in xrange(1, self.comm_size):
-			for t in self.parse_list(self.comm.recv(source=i, tag=TAG_GIVE_A_TREE)):
-				trees.add(t)
+			for a_tree in self.parse_list(self.comm.recv(source=i, tag=TAG_GIVE_A_TREE)):
+				trees.add(a_tree)
 		fused = reduce(lambda x, y: x.fuse(y, self.cm), trees)
 		trees.add(fused)
 		best, best_len = tree.best(trees, self.cm)
-		print "Number of best trees: ", len(best)
-		print "Number of trees: ", len(trees)
-		print "Number of input trees: ", len(t)
 		if time.time() < self.time_limit:
 			self.next_time = self.send_to_slaves(best)
 			print "Current best tree length: %d" % best_len
