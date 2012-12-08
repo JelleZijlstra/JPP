@@ -20,6 +20,7 @@ class tree(object):
 		if self.is_terminal:
 			self.id = id
 		else:
+			# make sure we cannot construct trees (A,B) and (B,A) that would be seen as different
 			st1, st2 = children
 			if st1 < st2:
 				self.left = st1
@@ -121,6 +122,7 @@ class tree(object):
 			return (self.left == rhs.left) and (self.right == rhs.right)
 
 	def __lt__(self, rhs):
+		'''Defines lesser-than operation, used in __init__ to prevent construction of rotated-identical trees'''
 		if self.is_terminal:
 			if rhs.is_terminal:
 				return self.id < rhs.id
@@ -197,3 +199,31 @@ def one_best(trees, cm):
 
 def parse(string):
 	return tree_parse.parse(string)
+
+def run_tests():
+	# initialization
+	import charmatrix
+	cm = charmatrix.charmatrix("data/data2.txt")
+	trees = list(all_trees(cm.taxon_set(), cm.get_outgroup()))
+	
+	# test tree.size
+	assert trees[0].size() == 5, "there are 5 taxa in the tree"
+
+	# test all_trees
+	assert len(trees) == 15, "there are 15 trees for 4 taxa (excluding outgroup)"
+	assert len(set(trees)) == 15, "trees should be unique"
+
+	# test one_tree
+	assert one_tree(cm).taxon_set() == cm.taxon_set(), "taxa in one_tree should be those in charmatrix"
+
+	# test best and one_best
+	correct_tree = parse("(0,(1,(2,(3,4))))")
+
+	best_trees, length = best(trees, cm)
+
+	assert len(best_trees) == 1, "there is only one optimal tree"
+	assert best_trees[0] == correct_tree, "best tree is not correct"
+	assert length == 8, "length of best tree is 8"
+
+	one = one_best(trees, cm)
+	assert one == correct_tree, "one_best should also return this tree"

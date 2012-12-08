@@ -6,8 +6,11 @@ import serial_util
 import charmatrix
 import exhaustive
 import fuser
+import list_tree
+import tree
+import tree_parse
 
-TESTABLE = [charmatrix, exhaustive, fuser]
+TESTABLE = [charmatrix, exhaustive, fuser, list_tree, tree, tree_parse]
 
 def run():
 	print 'Running tests...'

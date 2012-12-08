@@ -16,7 +16,7 @@ leaf:
 	\d+
 ;
 
-This parser was constructed on the basis of the parser constructed by Yacc from the grammar in parsing/tree.y.
+This parser was constructed on the basis of the parser constructed by Yacc from the grammar in dev/tree.y.
 
 '''
 import tree
@@ -139,3 +139,20 @@ class parser(object):
 def parse(string):
 	p = parser(string)
 	return p.do_parse()
+
+def run_tests():
+	node = tree.node
+	leaf = tree.leaf
+
+	# test the tokenizer
+	tokens = list(tokenize('(1,2)'))
+	assert tokens == [('(', '('), (T_DIGIT, 1), (',', ','), (T_DIGIT, 2), (')', ')'), (T_END, T_END)], "tokenizer does not run correctly"
+
+	# test the whole parsing process
+	t1 = parse('(1,2)')
+	assert t1 == node(leaf(1), leaf(2)), "cannot parse simple tree"
+	t2 = parse('((3,4),(2,1))')
+	assert t2 == node(node(leaf(3), leaf(4)), node(leaf(2), leaf(1))), "cannot parse tree of depth 2"
+	t3 = parse('((3,(4,5)),(1,2))')
+	assert t3 == node(node(leaf(3), node(leaf(4), leaf(5))), node(leaf(1), leaf(2))), "cannot parse tree of depth 3"
+

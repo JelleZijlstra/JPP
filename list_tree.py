@@ -196,3 +196,31 @@ def random_in(size, in_set):
 	while out not in in_set:
 		out = (out + 1) % size
 	return out
+
+def run_tests():
+	# random_not_in
+	my_set = set([1, 2, 3, 4])
+	assert random_not_in(5, my_set) == 0, "it can only be 0"
+	# random_in
+	assert random_in(5, my_set) in my_set, "number must be in set"
+
+	# list_tree itself
+	import charmatrix
+
+	# prepare trees
+	cm = charmatrix.charmatrix('data/shortoryzos.txt')
+	t = tree.one_tree(cm)
+
+	# test conversion with tree
+	lt = list_tree(tree=t)
+	tt = lt.to_tree()
+	assert tt == t, "list_tree <=> tree conversion should be reversible"
+
+	# test length
+	assert t.length(cm) == lt.length(cm), "tree length should give same result for tree and list_tree"
+
+	# test init_from_taxa
+	taxa = cm.taxon_set()
+	outgroup = cm.get_outgroup()
+	lt2 = list_tree(taxa=taxa, outgroup=outgroup)
+	assert lt2.to_tree().taxon_set() == taxa

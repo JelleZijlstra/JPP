@@ -1,3 +1,5 @@
+'''Utilities for timing'''
+
 import time
 
 def time_serial(f, label=None, repeats=1):
