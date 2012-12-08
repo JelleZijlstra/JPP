@@ -1,0 +1,7 @@
+# Data file with multiple characters and one simple optimal tree (A,(B,C,(D,E)))
+8 5
+A	00000000
+B	11000000
+C	11001100
+D	11111100
+E	11111111

@@ -1,0 +1,5 @@
+# Very simple data file.
+3 3
+A	012
+B	210
+C	000

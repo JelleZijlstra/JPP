@@ -21,6 +21,10 @@ class charmatrix(object):
 		# open file, read nchars and ntaxa
 		infile = open(filename, 'r')
 		firstline = infile.readline()
+		# enable comment lines at start
+		while firstline[0] == '#':
+			firstline = infile.readline()
+
 		data = re.split(' ', firstline)
 		self.nchars = int(data[0])
 		self.ntaxa = int(data[1])
