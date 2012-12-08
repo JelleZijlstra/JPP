@@ -206,6 +206,9 @@ def run_tests():
 	cm = charmatrix.charmatrix("data/data2.txt")
 	trees = list(all_trees(cm.taxon_set(), cm.get_outgroup()))
 	
+	# test equality checking and construction
+	assert node(leaf(1), leaf(2)) == node(leaf(2), leaf(1)), "trees should be the same"
+
 	# test tree.size
 	assert trees[0].size() == 5, "there are 5 taxa in the tree"
 
