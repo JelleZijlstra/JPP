@@ -105,7 +105,8 @@ Type ``python main.py'' for usage notes. Here are some example invocations:
   Performs an exhaustive search on the datafile ``data/shortoryzos.txt''.
 
 2.1. Organization.
-The program comprises the following code files:
+The implementation resides in the src/ directory. The program comprises the
+following code files:
 - branchnbound.py -- Implementation of branch-and-bound search.
 - charmatrix.py -- Class representing a taxon-character matrix.
 - exhaustive.py -- Implementation of exhaustive search.
@@ -127,5 +128,7 @@ The program comprises the following code files:
 - tree.py -- Implementation of trees as immutable, recursive data structures.
 - tree_parse.py -- Parser that parses a string of the form "(1,(2,3))", used
   for MPI communication, into a tree object.
+The data/ directory contains example datasets, and the dev/ directory contains
+some code used in development.
 
 3. Performance.
