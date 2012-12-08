@@ -20,7 +20,13 @@ class tree(object):
 		if self.is_terminal:
 			self.id = id
 		else:
-			self.left, self.right = children
+			st1, st2 = children
+			if st1 < st2:
+				self.left = st1
+				self.right = st2
+			else:
+				self.left = st2
+				self.right = st1
 		self.length_cache = None
 		self.size_cache = None
 		self.left_first = True
@@ -113,6 +119,18 @@ class tree(object):
 			return self.id == rhs.id
 		else:
 			return (self.left == rhs.left) and (self.right == rhs.right)
+
+	def __lt__(self, rhs):
+		if self.is_terminal:
+			if rhs.is_terminal:
+				return self.id < rhs.id
+			else:
+				return True
+		else:
+			if rhs.is_terminal:
+				return False
+			else:
+				return self.left < rhs.left
 
 	def taxon_set(self):
 		if self.is_terminal:

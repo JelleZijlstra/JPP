@@ -32,3 +32,9 @@ def exhaustive_search(cm):
 	print "Length of best tree: %d" % best_length
 
 	return best_tree
+
+def run_tests():
+	import charmatrix
+	cm = charmatrix.charmatrix("data/data2.txt")
+	t = exhaustive_search(cm)
+	assert t == tree.parse("(0,(1,(2,(3,4))))"), "exhaustive search must return this tree"

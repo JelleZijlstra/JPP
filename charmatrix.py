@@ -80,3 +80,32 @@ class charmatrix(object):
 	def ingroup_set(self):
 		'''Return the set of taxa in the ingroup'''
 		return set(xrange(1, self.ntaxa))
+
+def run_tests():
+	cm = charmatrix("data/data.txt")
+
+	# properties
+	assert cm.nchars == 3, "matrix should have 3 characters"
+	assert cm.ntaxa == 3, "matrix should have 3 taxa"
+
+	# get_name
+	assert cm.get_name(0) == 'A', "taxon id 0 should correspond to A"
+	assert cm.get_name(1) == 'B', "taxon id 1 should correspond to B"
+
+	# get_trait
+	assert cm.get_trait(0, 0) == 0, "trait 0 should be 0 for A"
+	assert cm.get_trait(1, 0) == 2, "trait 0 should be 2 for B"
+	assert cm.get_trait(2, 1) == 0, "trait 1 should be 0 for C"
+
+	# helper
+	def list_of_set(s):
+		return sorted(map(lambda id: cm.get_name(id), s))
+
+	# taxon_set
+	assert list_of_set(cm.taxon_set()) == ['A', 'B', 'C'], "taxa should be A, B, and C"
+
+	# get_outgroup
+	assert cm.get_name(cm.get_outgroup()) == 'A', "outgroup should be taxon A"
+
+	# ingroup_set
+	assert list_of_set(cm.ingroup_set()) == ['B', 'C'], "ingroup should be B and C"
