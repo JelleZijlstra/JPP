@@ -132,3 +132,17 @@ The data/ directory contains example datasets, and the dev/ directory contains
 some code used in development.
 
 3. Performance.
+Since this program uses heuristic search and does not calculate an exact
+result, it is not meaningful to compute measures like speedup. Instead, we can
+look at how short the trees produced by the program are as a function of the
+number of processes and the runtime.
+
+I ran the program on the dataset in data/oryzos.txt, with a communication
+interval of 15 s, using TBR, under the following three configurations:
+- Single process, run for 2 min -- produces a single tree of length 973
+- Single process, run for 8 min -- produces a single tree of length 918
+- Four processes, run for 2 min -- produce a single tree of length 961
+
+Thus, the multiple processes together perform better than a single process, but
+not nearly as well as a single process run longer. This suggests that the
+strategy used for communicating between the processes is not yet optimal.
