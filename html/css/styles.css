@@ -1,5 +1,15 @@
-.centered_image {
+.centered-image img {
+    display: block;
 	margin-left: auto;
 	margin-right: auto;
 	height: 300px;
+}
+
+/* bootstrap gives you no left margin */
+body {
+    margin-left: 3em;
+}
+.subtitle {
+    font-size: 150%;
+    font-style: italic;
 }
