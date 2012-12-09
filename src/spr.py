@@ -37,5 +37,5 @@ class spr_searcher(list_tree_searcher):
 
 def spr_search(cm, communicator):
 	'''Perform a heuristic search using SPR'''
-	searcher = spr_searcher(cm, communicator)
-	return searcher.do_search()
+	searcher = spr_searcher(cm)
+	communicator.do_search(searcher)

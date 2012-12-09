@@ -37,5 +37,5 @@ class tbr_searcher(list_tree_searcher):
 		return t
 
 def tbr_search(cm, communicator):
-	searcher = tbr_searcher(cm, communicator)
-	return searcher.do_search()
+	searcher = tbr_searcher(cm)
+	communicator.do_search(searcher)

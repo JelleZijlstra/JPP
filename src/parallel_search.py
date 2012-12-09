@@ -106,6 +106,11 @@ class communicator(object):
 		else:
 			return self.slave(tree)
 
+	def do_search(self, searcher):
+		trees = self.callback(searcher.do_search(self))
+		while True:
+			trees = self.callback(searcher.do_search(self, trees=trees))
+
 	def need_to_communicate(self):
 		'''Tell the process whether it needs to communicate its trees'''
 		return time.time() > self.next_time
