@@ -146,3 +146,7 @@ interval of 15 s, using TBR, under the following three configurations:
 Thus, the multiple processes together perform better than a single process, but
 not nearly as well as a single process run longer. This suggests that the
 strategy used for communicating between the processes is not yet optimal.
+
+4. Links.
+- http://www.github.com/JelleZijlstra/JPP - source code
+- http://cloud.cs50.net/~zijlstra/JPP/html/ - project website
