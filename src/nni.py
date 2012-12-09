@@ -54,19 +54,20 @@ def rearrange_tree(t):
 
 def nni_search(cm, communicator):
 	'''Perform a search using NNI'''
-	first_tree = tree.one_tree(cm)
-	first_len = first_tree.length(cm)
+	first_tree = [tree.one_tree(cm)]
+	first_len = first_tree[0].length(cm)
 	print "Initial tree length: %d" % first_len
 	i = 0
 	while True:
-		new_tree = rearrange_tree(first_tree)
+		new_tree = rearrange_tree(first_tree[0])
 		new_len = new_tree.length(cm)
 		if new_len < first_len:
 			print "New length, current minimum length: %d, %d" % (new_len, first_len)
 			first_len = new_len
-			first_tree = new_tree
+			first_tree = [new_tree]
 		if i % 1000 == 0:
 			communicator.callback(first_tree)
 		i += 1
+		random.shuffle(first_tree)
 
 	return first_tree
