@@ -13,7 +13,7 @@ function render($template, $data) {
 
 	);
 
-	require_once("../templates/header.php");
-	require_once("../templates/" . $template . ".php");
-	require_once("../templates/footer.php");
+	require_once("templates/header.php");
+	require_once("templates/" . $template . ".php");
+	require_once("templates/footer.php");
 }
