@@ -1,1 +1,5 @@
-
+.centered_image {
+	margin-left: auto;
+	margin-right: auto;
+	height: 300px;
+}
