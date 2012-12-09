@@ -11,6 +11,7 @@ def main(args):
 		run_tests.run()
 	else:
 		cm = charmatrix.charmatrix(args.datafile)
+		cm.print_summary()
 
 		if args.algorithm == 'exhaustive':
 			import exhaustive

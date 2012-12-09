@@ -73,6 +73,9 @@ class charmatrix(object):
 		print "Matrix:"
 		print self.matrix
 
+	def print_summary(self):
+		print "Character matrix has %d characters for %d taxa" % (self.nchars, self.ntaxa)
+
 	def taxon_set(self):
 		'''Return the set of taxa in the matrix'''
 		return set(xrange(self.ntaxa))
