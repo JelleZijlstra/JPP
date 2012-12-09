@@ -3,7 +3,7 @@
 import charmatrix
 import argparse
 
-ALGORITHMS = ['exhaustive', 'bnb', 'branch-and-bound', 'nni', 'spr', 'tbr']
+ALGORITHMS = ['exhaustive', 'bnb', 'branch-and-bound', 'nni', 'spr', 'tbr', 'mixed']
 
 def main(args):
 	if args.test:
@@ -33,6 +33,9 @@ def main(args):
 			elif args.algorithm == 'tbr':
 				import tbr
 				tbr.tbr_search(cm, comm)
+			elif args.algorithm == 'mixed':
+				import mixed
+				mixed.mixed_search(cm, comm)
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Perform phylogenetic inference using maximum parsimony')
