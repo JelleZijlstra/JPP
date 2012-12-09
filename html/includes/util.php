@@ -5,9 +5,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
-
-function render($template, $data) {
+function render($template, $data = array()) {
 	$data['_links'] = array(
 		'index' => 'Home',
 
