@@ -11,7 +11,7 @@ import list_tree
 import random
 from list_tree_searcher import list_tree_searcher
 
-class tbr_searcher(list_tree_searcher):
+class searcher(list_tree_searcher):
 	def rearrange_tree(self):
 		t = self.t
 		node_count = t.node_count()
@@ -37,5 +37,5 @@ class tbr_searcher(list_tree_searcher):
 		return t
 
 def tbr_search(cm, communicator):
-	searcher = tbr_searcher(cm)
-	communicator.do_search(searcher)
+	my_searcher = searcher(cm)
+	communicator.do_search(my_searcher)

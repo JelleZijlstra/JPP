@@ -52,7 +52,7 @@ def rearrange_tree(t):
 		else:
 			return tree.tree(children=(t.left, rearrange_tree(t.right)))
 
-class nni_searcher(object):
+class searcher(object):
 	def __init__(self, cm):
 		self.cm = cm
 
@@ -85,5 +85,5 @@ class nni_searcher(object):
 
 def nni_search(cm, communicator):
 	'''Perform a search using NNI'''
-	searcher = nni_searcher(cm)
-	communicator.do_search(searcher)
+	my_searcher = searcher(cm)
+	communicator.do_search(my_searcher)
