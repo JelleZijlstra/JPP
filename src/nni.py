@@ -67,7 +67,9 @@ class nni_searcher(object):
 			first_len = trees[0].length(cm)
 
 		while not comm.need_to_communicate():
-			new_tree = rearrange_tree(first_tree[0])
+			# preserve outgroup
+			t = first_tree[0]
+			new_tree = tree.node(t.left, rearrange_tree(t.right))
 			new_len = new_tree.length(cm)
 			if new_len < first_len:
 				print "New length, current minimum length: %d, %d" % (new_len, first_len)
