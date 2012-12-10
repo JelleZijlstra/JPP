@@ -117,6 +117,8 @@ following code files:
 - list_tree_searcher.py -- Abstract class used for search in multiple
   processes using a heuristic algorithm.
 - main.py -- Entry point of the program.
+- mixed.py -- Searcher implementation that lets different processes use
+  different algorithms.
 - nni.py -- Implementation of NNI. 
 - parallel_search.py -- Class used for communication between different MPI
   processes to exchange trees.
@@ -142,6 +144,8 @@ interval of 15 s, using TBR, under the following three configurations:
 - Single process, run for 2 min -- produces a single tree of length 973
 - Single process, run for 8 min -- produces a single tree of length 918
 - Four processes, run for 2 min -- produce a single tree of length 961
+I also ran the program under the "mixed" configuration with four processes for
+two minutes with an interval of 15 s. This yielded a tree of length 934.
 
 Thus, the multiple processes together perform better than a single process, but
 not nearly as well as a single process run longer. This suggests that the
