@@ -1,7 +1,8 @@
 '''
 Mixed search
-Perform a different 
-
+Perform a heuristic search, using a different algorithm in each process. The
+mixed_searcher class decides which algorithm to use on the basis of the MPI
+process's rank.
 '''
 
 import nni
