@@ -151,6 +151,16 @@ Thus, the multiple processes together perform better than a single process, but
 not nearly as well as a single process run longer. This suggests that the
 strategy used for communicating between the processes is not yet optimal.
 
-4. Links.
+4. Possible future optimizations.
+Profiling (using CProfile) reveals that the TBR algorithm spends about half of
+its time in the list_tree.char_length method. This method could probably be
+optimized by caching partial results in the tree and invalidating portions of
+the cache in the event of rearrangements.
+
+The program also spends a significant amount of time in the MPI recv method. It
+may be possible to increase productivity by performing further searches during
+recv wait time.
+
+5. Links.
 - http://www.github.com/JelleZijlstra/JPP - source code
 - http://cloud.cs50.net/~zijlstra/JPP/html/ - project website
