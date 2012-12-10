@@ -14,5 +14,5 @@
 <h3>External links</h3>
 <ul>
 	<li><a href="http://www.github.com/JelleZijlstra/JPP">Source code</a></li>
-	<!--<li><a YouTube video-->
+	<li><a href="http://youtu.be/0fS0zfdye_k">Project video</a></li>
 </ul>
