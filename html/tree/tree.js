@@ -39,19 +39,19 @@ var jstree = (function($) {
 
 		this.isTerminal = function() {
 			return terminal;
-		}
+		};
 		this.name = function() {
 			if(!terminal) {
 				throw new TreeError("Cannot provide name for non-terminal");
 			}
 			return name;
-		}
+		};
 		this.children = function() {
 			if(terminal) {
 				throw new TypeError("Cannot provide children for terminal node");
 			}
 			return [left, right];
-		}
+		};
 	}
 
 	function leaf(name) {
@@ -108,7 +108,7 @@ var jstree = (function($) {
 					$leftCorner.addClass('jstree-left-border');
 				}
 				var $leftChild = $("<div>").addClass('jstree-right').append(make(children[0], LEFT_DOWN));
-				var $upper = $("<div>").addClass('jstree-row').append($leftCorner).append($leftChild);
+				var $upperHalf = $("<div>").addClass('jstree-row').append($leftCorner).append($leftChild);
 
 
 				var $rightCorner = $("<div>").addClass('jstree-left');
@@ -116,9 +116,9 @@ var jstree = (function($) {
 					$rightCorner.addClass('jstree-left-border');
 				}
 				var $rightChild = $("<div>").addClass('jstree-right').append(make(children[1], LEFT_UP));
-				var $lower = $("<div>").addClass('jstree-row').append($rightCorner).append($rightChild);
+				var $lowerHalf = $("<div>").addClass('jstree-row').append($rightCorner).append($rightChild);
 
-				var $tree = $("<div>").addClass('jstree-tree').append($upper).append($lower);
+				var $tree = $("<div>").addClass('jstree-tree').append($upperHalf).append($lowerHalf);
 				return $tree;
 			}
 		}
@@ -126,19 +126,23 @@ var jstree = (function($) {
 		return function($elt, tree) {
 			var $tree = make(tree, LEFT_NONE);
 			$elt.append($tree);
-		}
+		};
 	})();
 
 	// jQuery plugin
 	$.fn.tree = function(tree) {
 		makeTree(this, tree);
 		return this;
-	}
+	};
 
 	// automatically convert trees at load time
 	$(function() {
 		$('.jstree-stub').each(function() {
 			var $location = $(this);
+			/*
+			 * eval is evil, but the alternative would be to write a parser for expressions like "(A,(B,C))".
+			 * That's not impossible, and eventually it's what I'd like to do, but for now I'll keep it to this.
+			 */
 			var tree = eval($location.attr('data-tree'));
 			$location.tree(tree);
 		});
