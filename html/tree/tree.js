@@ -6,6 +6,9 @@
 
 var jstree = (function($) {
 
+	/*
+	 * Randomly shuffle an array.
+	 */
 	function shuffleArray(array) {
 		// Fisher-Yates shuffle
 		var len = array.length;
@@ -18,10 +21,16 @@ var jstree = (function($) {
 		return array;
 	}
 
+	/*
+	 * Constructor for custom exception class.
+	 */
 	function TreeError(description) {
 		this.description = description;
 	}
 
+	/*
+	 * Tree constructor.
+	 */
 	function Tree(params) {
 		var terminal = (typeof params.name !== 'undefined');
 		if(terminal) {
@@ -54,6 +63,9 @@ var jstree = (function($) {
 		};
 	}
 
+	/*
+	 * Utility constructor functions.
+	 */
 	function leaf(name) {
 		return new Tree({name: name});
 	}
@@ -62,6 +74,9 @@ var jstree = (function($) {
 		return new Tree({left: left, right: right});
 	}
 
+	/*
+	 * String conversion.
+	 */
 	Tree.prototype.toString = function() {
 		if(this.isTerminal()) {
 			return this.name();
@@ -71,6 +86,9 @@ var jstree = (function($) {
 		}
 	};
 
+	/*
+	 * Build one random tree from taxa.
+	 */
 	Tree.oneTree = function(taxa) {
 		leaves = shuffleArray(taxa.map(leaf));
 		while(leaves.length > 1) {
@@ -82,6 +100,9 @@ var jstree = (function($) {
 		return leaves[0];
 	};
 
+	/*
+	 * Build an HTML representation of a tree.
+	 */
 	var makeTree = (function() {
 		var LEFT_NONE = 0;
 		var LEFT_UP = 1;
@@ -129,6 +150,51 @@ var jstree = (function($) {
 		};
 	})();
 
+	/*
+	 * Exhaustive search
+	 */
+	function treesAdding(tree, taxon) {
+		if(tree.isTerminal()) {
+			return [node(tree, taxon)];
+		} else {
+			var outTrees = [node(tree, taxon)];
+			var children = tree.children();
+			var leftTrees = treesAdding(children[0], taxon);
+			for(var i = 0; i < leftTrees.length; i++) {
+				outTrees.push(node(leftTrees[i], children[1]));
+			}
+			var rightTrees = treesAdding(children[1], taxon);
+			for(var i = 0; i < rightTrees.length; i++) {
+				outTrees.push(node(rightTrees[i], children[0]));
+			}
+			return outTrees;
+		}
+	}
+
+	function allTreesRec(taxa) {
+		if(taxa.length == 1) {
+			return [leaf(taxa[0])];
+		} else {
+			var taxon = taxa.pop();
+			var trees = [];
+			var subTrees = allTreesRec(taxa);
+			for(var i = 0, len = subTrees.length; i < len; i++) {
+				trees = trees.concat(treesAdding(subTrees[i], leaf(taxon)));
+			}
+			return trees;
+		}
+	}
+
+	function allTrees(taxa) {
+		var outgroup = leaf(taxa.shift());
+		var inTrees = allTreesRec(taxa);
+		var outTrees = [];
+		for(var i = 0, len = inTrees.length; i < len; i++) {
+			outTrees.push(node(outgroup, inTrees[i]));
+		}
+		return outTrees;
+	}
+
 	// jQuery plugin
 	$.fn.tree = function(tree) {
 		makeTree(this, tree);
@@ -153,6 +219,7 @@ var jstree = (function($) {
 		leaf: leaf,
 		node: node,
 		Tree: Tree,
-		TreeError: TreeError
+		TreeError: TreeError,
+		allTrees: allTrees
 	};
 })(jQuery);
