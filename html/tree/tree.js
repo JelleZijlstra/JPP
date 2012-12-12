@@ -4,6 +4,18 @@
  * JavaScript library for implementing and manipulating trees.
  */
 
+function shuffleArray(array) {
+	// Fisher-Yates shuffle
+	var len = array.length;
+	for(var i = len - 1; i > 0; i--) {
+		var j = Math.floor(Math.random() * (i + 1));
+		var tmp = array[i];
+		array[i] = array[j];
+		array[j] = tmp;
+	}
+	return array;
+}
+
 function TreeError(description) {
 	this.description = description;
 }
@@ -58,11 +70,12 @@ Tree.prototype.toString = function() {
 };
 
 Tree.oneTree = function(taxa) {
-	leaves = taxa.map(leaf);
+	leaves = shuffleArray(taxa.map(leaf));
 	while(leaves.length > 1) {
 		var left = leaves.shift();
 		var right = leaves.shift();
 		leaves.push(node(left, right));
+		shuffleArray(leaves);
 	}
 	return leaves[0];
 };
