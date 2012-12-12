@@ -7,7 +7,9 @@
 		<script type="text/javascript" src="tree.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				$("#tree-loc").tree(node(leaf('A'), node(leaf('B'), leaf('C')))).tree(Tree.oneTree(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']));
+				var node = jstree.node;
+				var leaf = jstree.leaf;
+				$("#tree-loc").tree(node(leaf('A'), node(leaf('B'), leaf('C')))).tree(jstree.Tree.oneTree(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']));
 			});
 		</script>
 	</head>
