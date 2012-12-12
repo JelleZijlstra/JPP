@@ -135,6 +135,15 @@ var jstree = (function($) {
 		return this;
 	}
 
+	// automatically convert trees at load time
+	$(function() {
+		$('.jstree-stub').each(function() {
+			var $location = $(this);
+			var tree = eval($location.attr('data-tree'));
+			$location.tree(tree);
+		});
+	});
+
 	// public API
 	return {
 		leaf: leaf,
