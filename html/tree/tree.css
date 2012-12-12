@@ -1,0 +1,77 @@
+/*
+ * tree.css
+ *
+ * CSS for jstree.
+ */
+.jstree {
+	padding: 0;
+	margin: 0;
+	display: table;
+	width: 100%;
+	height: 200px;
+}
+.jstree-row {
+	padding: 0;
+	margin: 0;
+	display: table-row;
+	height: 50%;
+}
+
+.jstree-left {
+	padding: 0;
+	margin: 0;
+	display: table-cell;
+	width: 25px;
+}
+
+.jstree-upper {
+	border-bottom: solid 1px black;
+}
+
+.jstree-right: {
+	padding: 0;
+	margin: 0;
+	display: table-cell;
+}
+
+.jstree-left-border {
+	border-left: solid 1px black;
+}
+
+.jstree-terminal-container {
+	display: table;
+	float: left;
+}
+
+.jstree-terminal-row {
+	display: table-row;
+}
+
+.jstree-terminal-node {
+	width: 25px;
+	display: table-cell;
+	margin: 0;
+	padding: 0;
+}
+
+.jstree-terminal-label {
+	/*float: right;*/
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.jstree-terminal-upper {
+	border-bottom: solid 1px black;	
+}
+
+.jstree-terminal-upper, .jstree-terminal-lower {
+	margin: 0;
+	padding: 0;
+}
+
+.jstree-terminal-upper:after, .jstree-terminal-lower:after {
+	/* http://stackoverflow.com/questions/190396/adding-html-entities-using-css-content */
+	content: '\a0';
+}
+

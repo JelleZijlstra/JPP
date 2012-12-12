@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test for JSTree</title>
+		<link rel="stylesheet" type="text/css" href="tree.css"/>
+	    <script type="text/javascript" src="../js/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="tree.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("#tree-loc").tree(node(leaf('A'), node(leaf('B'), leaf('C')))).tree(Tree.oneTree(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']));
+			});
+		</script>
+	</head>
+	<body>
+
+<div id="tree-loc">
+</div>
+<div class="jstree-tree">
+	<div class="jstree-row">
+		<div class="jstree-left jstree-upper">
+
+		</div>
+		<div class="jstree-right">
+			<div class="jstree-terminal-container">
+				<div class="jstree-terminal-row">
+					<div class="jstree-terminal-node">
+						<div class="jstree-terminal-upper jstree-upper"></div>
+						<div class="jstree-terminal-lower jstree-left-border"></div>
+					</div>
+					<div class="jstree-terminal-label">
+						Species A
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="jstree-row">
+		<div class="jstree-left">
+
+		</div>
+		<div class="jstree-right">
+			<div class="jstree-terminal-container">
+				<div class="jstree-terminal-row">
+					<div class="jstree-terminal-node">
+						<div class="jstree-terminal-upper jstree-upper jstree-left-border"></div>
+						<div class="jstree-terminal-lower"></div>
+					</div>
+					<div class="jstree-terminal-label">
+						Species B
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	</body>
+</html>
