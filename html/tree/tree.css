@@ -3,18 +3,14 @@
  *
  * CSS for jstree.
  */
-.jstree {
-	padding: 0;
-	margin: 0;
-	display: table;
-	width: 100%;
-	height: 200px;
+.jstree-tree {
+
 }
+
 .jstree-row {
 	padding: 0;
 	margin: 0;
 	display: table-row;
-	height: 50%;
 }
 
 .jstree-left {
@@ -24,11 +20,11 @@
 	width: 25px;
 }
 
-.jstree-upper {
+.jstree-upper, .jstree-terminal-upper {
 	border-bottom: solid 1px black;
 }
 
-.jstree-right: {
+.jstree-right {
 	padding: 0;
 	margin: 0;
 	display: table-cell;
@@ -55,14 +51,8 @@
 }
 
 .jstree-terminal-label {
-	/*float: right;*/
 	display: table-cell;
-	height: 100%;
 	vertical-align: middle;
-}
-
-.jstree-terminal-upper {
-	border-bottom: solid 1px black;	
 }
 
 .jstree-terminal-upper, .jstree-terminal-lower {

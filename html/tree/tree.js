@@ -88,7 +88,7 @@ var makeTree = (function() {
 	function make(tree, leftBorder) {
 		if(tree.isTerminal()) {
 			var $label = $("<div>").addClass('jstree-terminal-label').text(tree.name());
-			var $upper = $("<div>").addClass('jstree-terminal-upper').addClass('jstree-upper');
+			var $upper = $("<div>").addClass('jstree-terminal-upper');
 			if(leftBorder == LEFT_UP) {
 				$upper.addClass('jstree-left-border');
 			}
