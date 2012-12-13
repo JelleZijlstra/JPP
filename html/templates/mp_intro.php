@@ -2,7 +2,7 @@
 <p>In essence, maximum parsimony (MP) relies on finding a tree describing the relationships among taxa (operational units) that requires the smallest number of character changes during evolution.</p>
 
 <h2>A simple example</h2>
-<p>For example, suppose we have four species–A, B, C, and D. They vary in two characters: A has red eyes while B, C, and D have blue eyes; and A and B have a blue nose while C and D have a red one. We arbitrarily select A as the outgroup (the first-branching taxon). That means there are three possible trees:</p>
+<p>For example, suppose we have four species—A, B, C, and D. They vary in two characters: A has red eyes while B, C, and D have blue eyes; and A and B have a blue nose while C and D have a red one. We arbitrarily select A as the outgroup (the first-branching taxon). That means there are three possible trees:</p>
 
 <ol>
 	<li>
@@ -40,7 +40,7 @@ D 11
 <p>This is accomplished using heuristic algorithms that perform slight rearrangements on a tree in order to improve it—for example, exchange two adjacent nodes or branches of the tree. Common heuristic algorithms include:</p>
 <ul>
 	<li>Nearest Neighbor Interchange (NNI) – perform rearrangements of the type (A,(B,C)) -> (B,(A,C))</li>
-	<li>Subtree Pruning Rebranching (SPR) – prune a random subtree from the tree, then replant that tree at a random different location in the tree.</p>
+	<li>Subtree Pruning Rebranching (SPR) – prune a random subtree from the tree, then replant that tree at a random different location in the tree.</li>
 	<li>Tree Bissection Reconnection (TBR) – similar to SPR, but more powerful. The tree is bissected at a random node, and the two partial trees that result are both treated as unrooted and reconnected at random spots.</li>
 </ul>
 
