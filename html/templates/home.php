@@ -6,10 +6,7 @@
 </div>
 <p>The above image is the first evolutionary tree drawn by Charles Darwin in 1837. It shows the relationships among a set of arbitrary species in the form of a tree. The image of a tree is still used to represent the relationships among different organisms, and since the latter half of the 20th century it has become common to use numerical methods to reconstruct evolutionary trees algorithmically. Maximum parsimony is one method used for this purpose (others are maximum likelihood, Bayesian inference, and neighbor-joining).</p>
 
-<p>I worked on this project as part of <a href="http://www.cs205.org">Computer Science 205</a>: Computing Foundations for Computational Science. In this website, I provide documentation and background for the project, including the following:</p>
-<ul>
-	<li><a href="mp_intro.php">Introduction to Maximum Parsimony</a></li>
-</ul>
+<p>I worked on this project as part of <a href="http://www.cs205.org">Computer Science 205</a>: Computing Foundations for Computational Science. In this website, I provide documentation and background for the project. See the top of this page for links to the rest of the website.</p>
 
 <h3>External links</h3>
 <ul>
