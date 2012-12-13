@@ -21,7 +21,7 @@
 		});
 	});
 </script>
-<h1>Exhaustive maximum-parsimony tree search</h1>
+<h2>Exhaustive maximum-parsimony tree search</h2>
 
 <form class="input">
 	<label for="cm">
@@ -39,12 +39,12 @@
 
 		<p>Do <strong>not</strong> run this script with more than ~9 taxa in the matrix—the time required for the computation rapidly passes the age of the universe.</p>
 	</label>
-	<textarea name="cm" id="tree-cm"/>
-	<input type="button" id="tree-cm-submit"/>
+	<textarea name="cm" id="tree-cm"></textarea>
+	<input type="button" id="tree-cm-submit" value="Find best trees"></input>
 </form>
 
 <div id="results" style="display: none;">
-	<h2>Results</h2>
+	<h3>Results</h3>
 
 	<p>Tree length: <span id="tree-length"></span>.</p>
 	<p>Number of trees: <span id="tree-n"></span>.</p>
