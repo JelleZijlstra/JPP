@@ -1,9 +1,9 @@
 <script type="text/javascript">
 	$(function() {
 		$("#tree-cm-submit").click(function() {
-			var cmStr = $("#tree-cm").text();
+			var cmStr = $("#tree-cm").val();
 			try {
-				var cm = new jstree.CharMatrix(cmStr);
+				var cm = jstree.CharMatrix.make(cmStr);
 			} catch(e) {
 				alert("Could not parse character matrix");
 				return;
@@ -23,7 +23,7 @@
 </script>
 <style type="text/css">
 	#tree-cm {
-		height: 200;
+		height: 100px;
 		width: 100%;
 	}
 </style>
@@ -43,7 +43,7 @@ D 11
 
 		<p>The first line gives the number of taxa, then the number of characters. Taxon names cannot have whitespace in them.</p>
 
-		<p>Do <strong>not</strong> run this script with more than ~9 taxa in the matrix—the time required for the computation rapidly passes the age of the universe.</p>
+		<p>Do <strong>not</strong> run this script with more than ~9 taxa in the matrix&mdash;the time required for the computation rapidly passes the age of the universe.</p>
 	</label>
 	<textarea name="cm" id="tree-cm"></textarea>
 	<input type="button" id="tree-cm-submit" value="Find best trees"></input>
