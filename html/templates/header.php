@@ -22,7 +22,7 @@
 	<?php
 		foreach($data['_links'] as $url => $link) {
 			?>
-				<a href="<?= $url ?>.php"><?= $link ?></a>
+				<li><a href="<?= $url ?>.php"><?= $link ?></a></li>
 			<?php
 		}
 	?>

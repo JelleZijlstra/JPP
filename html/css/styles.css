@@ -13,3 +13,13 @@ body {
     font-size: 150%;
     font-style: italic;
 }
+
+#navigation-list {
+	list-style: none;
+}
+#navigation-list li {
+	display: inline;
+}
+#navigation-list li:not(:last-child):after {
+	content: ", ";
+}
