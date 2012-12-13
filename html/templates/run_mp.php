@@ -21,19 +21,25 @@
 		});
 	});
 </script>
+<style type="text/css">
+	#tree-cm {
+		height: 200;
+		width: 100%;
+	}
+</style>
 <h1>Exhaustive maximum-parsimony tree search</h1>
 
 <form class="input">
 	<label for="cm">
 		<p>Input your character matrix here in the form:</p>
 
-		<pre>
-		4 2
-		A 00
-		B 10
-		C 11
-		D 11
-		</pre>
+<pre>
+4 2
+A 00
+B 10
+C 11
+D 11
+</pre>
 
 		<p>The first line gives the number of taxa, then the number of characters. Taxon names cannot have whitespace in them.</p>
 
