@@ -24,3 +24,10 @@ body {
 #navigation-list li:not(:last-child):after {
 	content: " – ";
 }
+
+.terminal-output {
+	background-color: black;
+	color: green;
+	font-family: monospace;
+	white-space: preserve;
+}

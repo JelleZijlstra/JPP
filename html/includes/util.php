@@ -10,6 +10,7 @@ function render($template, $data = array()) {
 		'index' => 'Home',
 		'mp_intro' => 'Introduction to maximum parsimony',
 		'run_mp' => 'Run an MP search yourself',
+		'documentation' => 'Documentation for the program',
 	);
 
 	require_once("templates/header.php");
