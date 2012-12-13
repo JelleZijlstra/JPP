@@ -8,6 +8,7 @@
 /* bootstrap gives you no left margin */
 body {
     margin-left: 3em;
+    margin-right: 3em;
 }
 .subtitle {
     font-size: 150%;
