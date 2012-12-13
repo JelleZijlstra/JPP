@@ -9,7 +9,8 @@
 			$(function() {
 				var node = jstree.node;
 				var leaf = jstree.leaf;
-				$("#tree-loc").tree(node(leaf('A'), node(leaf('B'), leaf('C')))).tree(jstree.Tree.oneTree(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']));
+				var labeledTree = new jstree.Tree({left: new jstree.Tree({name: 'A', label: 'As'}), right: leaf('B'), label: 'Everything'});
+				$("#tree-loc").tree(node(leaf('A'), node(leaf('B'), leaf('C')))).tree(jstree.Tree.oneTree(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'])).tree(labeledTree);
 
 				var trees = jstree.allTrees(['A', 'B', 'C', 'D', 'E']);
 				var $loc = $('#all-trees');

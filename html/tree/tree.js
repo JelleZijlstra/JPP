@@ -45,6 +45,8 @@ var jstree = (function($) {
 				throw new TreeError("No right child given for non-terminal");
 			}
 		}
+		// Optional node label
+		var label = params.label;
 
 		this.isTerminal = function() {
 			return terminal;
@@ -61,6 +63,9 @@ var jstree = (function($) {
 			}
 			return [left, right];
 		};
+		this.label = function() {
+			return label;			
+		}
 	}
 
 	/*
@@ -104,16 +109,23 @@ var jstree = (function($) {
 	 * Build an HTML representation of a tree.
 	 */
 	var makeTree = (function() {
+		// codes for what cells to give a left border
 		var LEFT_NONE = 0;
 		var LEFT_UP = 1;
 		var LEFT_DOWN = 2;
 
 		function make(tree, leftBorder) {
+			var label = tree.label();
+			var hasLabel = typeof label !== 'undefined';
 			if(tree.isTerminal()) {
 				var $label = $("<div>").addClass('jstree-terminal-label').text(tree.name());
 				var $upper = $("<div>").addClass('jstree-terminal-upper');
 				if(leftBorder == LEFT_UP) {
 					$upper.addClass('jstree-left-border');
+				}
+				if(hasLabel) {
+					$content = $("<p>").addClass('jstree-branch-label').text(label);
+					$upper.append($content);
 				}
 				var $lower = $("<div>").addClass('jstree-terminal-lower');
 				if(leftBorder == LEFT_DOWN) {
@@ -127,6 +139,10 @@ var jstree = (function($) {
 				var $leftCorner = $("<div>").addClass('jstree-left').addClass('jstree-upper');
 				if(leftBorder == LEFT_UP) {
 					$leftCorner.addClass('jstree-left-border');
+				}
+				if(hasLabel) {
+					$content = $("<p>").addClass('jstree-branch-label').text(label);
+					$leftCorner.append($content);
 				}
 				var $leftChild = $("<div>").addClass('jstree-right').append(make(children[0], LEFT_DOWN));
 				var $upperHalf = $("<div>").addClass('jstree-row').append($leftCorner).append($leftChild);

@@ -22,6 +22,7 @@
 
 .jstree-upper, .jstree-terminal-upper {
 	border-bottom: solid 1px black;
+	vertical-align: bottom;
 }
 
 .jstree-right {
@@ -63,5 +64,10 @@
 .jstree-terminal-upper:after, .jstree-terminal-lower:after {
 	/* http://stackoverflow.com/questions/190396/adding-html-entities-using-css-content */
 	content: '\a0';
+}
+
+.jstree-branch-label {
+	display: inline;
+	font-size: small;
 }
 
