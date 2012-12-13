@@ -45,7 +45,7 @@ if __name__ == '__main__':
 	parser.add_argument('--time', '-t', default=10, type=int, help='Maximum time to use (in minutes; only for heuristic algorithms)')
 	parser.add_argument('--interval', '-i', default=10, type=int, help='Interval between communications between different MPI processes (in seconds)')
 	parser.add_argument('--profile', '-p', default=False, help='Output profiling data using CProfile', action="store_true")
-	parser.add_argument('--test', default=False, help='Whether to run tests', action="store_true")
+	parser.add_argument('--test', default=False, help='Run tests', action="store_true")
 
 	args = parser.parse_args()
 
