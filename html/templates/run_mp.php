@@ -14,6 +14,7 @@
 			var ntrees = trees[0].length;
 			$("#tree-n").text(ntrees);
 			var $loc = $("#tree-loc");
+			$loc.empty();
 			for(var i = 0; i < ntrees; i++) {
 				$loc.tree(trees[0][i]);
 			}
