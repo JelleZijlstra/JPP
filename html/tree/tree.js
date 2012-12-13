@@ -22,6 +22,69 @@ var jstree = (function($) {
 	}
 
 	/*
+	 * Get the keys of an array.
+	 */
+	function getKeys(array) {
+		return array.map(function(value, key) {
+			return key;
+		});
+	}
+
+	/*
+	 * Set implementation, optimized for small integers
+	 */
+	function Set() {
+		var length = arguments.length;
+		var set = [];
+		for(var i = 0; i < length; i++) {
+			set[arguments[i]] = true;
+		}
+		this.contains = function(elt) {
+			return set[elt] === true;
+		};
+		this.add = function(elt) {
+			if(set[elt] !== true) {
+				set[elt] = true;
+				length++;
+			}
+		};
+		this.remove = function(elt) {
+			if(selt[elt] === true) {
+				set[elt] = undefined;
+				length--;
+			}
+		};
+		this.size = function() {
+			return length;
+		};
+		this.members = function() {
+			return set.map(function(value, key) {
+				return (value === true) ? key : undefined;
+			}).filter(function(value) {
+				return value !== undefined;
+			});
+		}
+		this.intersection = function(otherSet) {
+			var outSet = new Set();
+			this.members().forEach(function(value) {
+				if(otherSet.contains(value)) {
+					outSet.add(value);
+				}
+			});
+			return outSet;
+		};
+		this.union = function(otherSet) {
+			var outSet = new Set();
+			var adder = function(value) {
+				outSet.add(value);
+			}
+			this.members().forEach(adder);
+			otherSet.members().forEach(adder);
+			return outSet;
+		}
+	}
+
+	/*
 	 * Constructor for custom exception class.
 	 */
 	function TreeError(description) {
@@ -47,6 +110,7 @@ var jstree = (function($) {
 		}
 		// Optional node label
 		var label = params.label;
+		var lengthCache = null;
 
 		this.isTerminal = function() {
 			return terminal;
@@ -65,7 +129,33 @@ var jstree = (function($) {
 		};
 		this.label = function() {
 			return label;			
-		}
+		};
+		this.fitchLength = function(cm) {
+			if(lengthCache === null) {
+				var length = [];
+				var nchars = cm.nchars();
+				if(terminal) {
+					for(var i = 0; i < nchars; i++) {
+						length[i] = [new Set(cm.getTrait(name, i)), 0];
+					}
+				} else {
+					var l = left.fitchLength(cm);
+					var r = right.fitchLength(cm);
+					for(var i = 0; i < nchars; i++) {
+						var l_set = l[i][0];
+						var r_set = r[i][0];
+						var inter = l_set.intersection(r_set);
+						if(inter.size() === 0) {
+							length[i] = [l_set.union(r_set), l[i][1] + r[i][1] + 1];
+						} else {
+							length[i] = [inter, l[i][1] + r[i][1]];
+						}
+					}
+				}
+				lengthCache = length;
+			}
+			return lengthCache;
+		};
 	}
 
 	/*
@@ -89,6 +179,16 @@ var jstree = (function($) {
 			var children = this.children();
 			return '(' + children[0].toString() + ',' + children[1].toString() + ')';
 		}
+	};
+
+	/*
+	 * Tree length
+	 */
+
+	Tree.prototype.length = function(cm) {
+		return this.fitchLength(cm).reduce(function(partial, data) {
+			return partial + data[1];
+		}, 0);
 	};
 
 	/*
@@ -120,7 +220,7 @@ var jstree = (function($) {
 			if(tree.isTerminal()) {
 				var $label = $("<div>").addClass('jstree-terminal-label').text(tree.name());
 				var $upper = $("<div>").addClass('jstree-terminal-upper');
-				if(leftBorder == LEFT_UP) {
+				if(leftBorder === LEFT_UP) {
 					$upper.addClass('jstree-left-border');
 				}
 				if(hasLabel) {
@@ -137,7 +237,7 @@ var jstree = (function($) {
 			} else {
 				var children = tree.children();
 				var $leftCorner = $("<div>").addClass('jstree-left').addClass('jstree-upper');
-				if(leftBorder == LEFT_UP) {
+				if(leftBorder === LEFT_UP) {
 					$leftCorner.addClass('jstree-left-border');
 				}
 				if(hasLabel) {
@@ -149,7 +249,7 @@ var jstree = (function($) {
 
 
 				var $rightCorner = $("<div>").addClass('jstree-left');
-				if(leftBorder == LEFT_DOWN) {
+				if(leftBorder === LEFT_DOWN) {
 					$rightCorner.addClass('jstree-left-border');
 				}
 				var $rightChild = $("<div>").addClass('jstree-right').append(make(children[1], LEFT_UP));
@@ -211,6 +311,77 @@ var jstree = (function($) {
 		return outTrees;
 	}
 
+	function renameTerminals(tree, cm) {
+		if(tree.isTerminal()) {
+			return leaf(cm.getName(tree.name()));
+		} else {
+			var children = tree.children();
+			return node(renameTerminals(children[0], cm), renameTerminals(children[1], cm));
+		}
+	}
+
+	function exhaustiveSearch(cm) {
+		var trees = allTrees(cm.taxonSet());
+		var shortest = [];
+		var length = null;
+		for(var i = 0, len = trees.length; i < len; i++) {
+			var treeLen = trees[i].length(cm);
+			if(length === null || treeLen < length) {
+				shortest = [trees[i]];
+				length = treeLen;
+			} else if(treeLen === length) {
+				shortest.push(trees[i]);
+			}
+		}
+		return [shortest.map(function(tree) {
+			return renameTerminals(tree, cm);
+		}), length];
+	}
+
+	/*
+	 * Taxon-character matrix class
+	 */
+	function CharMatrix(matrix, taxa) {
+		var ntaxa = taxa.length;
+		var nchars = matrix[0].length;
+
+		this.getName = function(id) {
+			return taxa[id];
+		};
+		this.getTrait = function(taxon, char) {
+			return matrix[taxon][char];
+		};
+		this.ntaxa = function() {
+			return ntaxa;
+		};
+		this.nchars = function() {
+			return nchars;
+		};
+		this.taxonSet = function() {
+			return getKeys(taxa);
+		};
+	}
+	CharMatrix.prototype.outgroup = function() {
+		return this.getKeys()[0];
+	};
+	CharMatrix.prototype.ingroup = function() {
+		return this.getKeys().slice(1);
+	}
+	CharMatrix.make = function(inputString) {
+		var lines = inputString.split(/\n/);
+		var intro = lines.shift();
+		var splitLines = lines.map(function(line) {
+			return line.split(/\s+/);
+		});
+		var taxa = splitLines.map(function(line) {
+			return line[0];
+		});
+		var matrix = splitLines.map(function(line) {
+			return line[1].split(/(?=.)/);
+		});
+		return new CharMatrix(matrix, taxa);
+	};
+
 	// jQuery plugin
 	$.fn.tree = function(tree) {
 		makeTree(this, tree);
@@ -236,6 +407,8 @@ var jstree = (function($) {
 		node: node,
 		Tree: Tree,
 		TreeError: TreeError,
-		allTrees: allTrees
+		allTrees: allTrees,
+		CharMatrix: CharMatrix,
+		exhaustiveSearch: exhaustiveSearch
 	};
 })(jQuery);
