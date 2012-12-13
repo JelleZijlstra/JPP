@@ -8,8 +8,7 @@
 
 <h3>Usage</h3>
 <p>To run the program, navigate into the <tt>JP/src/</tt> directory. Usage of the program is as follows:</p>
-<div class="terminal-output">
-$ python main.py --help
+<div class="terminal-output">$ python main.py --help
 usage: main.py [-h] [--datafile DATAFILE]
                [--algorithm {exhaustive,bnb,branch-and-bound,nni,spr,tbr,mixed}]
                [--time TIME] [--interval INTERVAL] [--profile] [--test]

@@ -29,5 +29,5 @@ body {
 	background-color: black;
 	color: green;
 	font-family: monospace;
-	white-space: preserve;
+	white-space: pre;
 }
