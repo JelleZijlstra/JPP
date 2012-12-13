@@ -7,10 +7,12 @@
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
     <link href="css/styles.css" rel="stylesheet"/>
+    <link href="tree/tree.css" rel="stylesheet"/>
 	<title>JPP: Jelle's Phylogeny Program<?= isset($data['title']) ? " – " . $data['title'] : '' ?></title>
     <script src="js/jquery-1.8.2.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="tree/tree.js"></script>
 </head>
 <body>
 
