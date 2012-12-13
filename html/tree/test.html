@@ -10,6 +10,12 @@
 				var node = jstree.node;
 				var leaf = jstree.leaf;
 				$("#tree-loc").tree(node(leaf('A'), node(leaf('B'), leaf('C')))).tree(jstree.Tree.oneTree(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']));
+
+				var trees = jstree.allTrees(['A', 'B', 'C', 'D', 'E']);
+				var $loc = $('#all-trees');
+				for(var i = 0; i < trees.length; i++) {
+					$loc.tree(trees[i]);
+				}
 			});
 		</script>
 	</head>
@@ -17,6 +23,9 @@
 
 <!-- Put trees here. TODO: find a way to specify the tree here, instead of in the JS, that doesn't use eval. -->
 <div id="tree-loc">
+</div>
+
+<div id="all-trees">
 </div>
 
 <div class="jstree-stub" data-tree="node(leaf('A'), node(node(leaf('D'), leaf('B')), leaf('C')))"></div>
