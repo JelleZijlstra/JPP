@@ -18,7 +18,7 @@
 
 <h1>Jelle's Phylogeny Program</h1>
 <div class="subtitle">Jelle Zijlstra, Harvard College, November&ndash;December 2012</div>
-<ul id="navigation_list">
+<ul id="navigation-list">
 	<?php
 		foreach($data['_links'] as $url => $link) {
 			?>

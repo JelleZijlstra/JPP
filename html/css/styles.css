@@ -21,5 +21,5 @@ body {
 	display: inline;
 }
 #navigation-list li:not(:last-child):after {
-	content: ", ";
+	content: " – ";
 }
