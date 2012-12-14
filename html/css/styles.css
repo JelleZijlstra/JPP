@@ -31,3 +31,8 @@ body {
 	font-family: monospace;
 	white-space: pre;
 }
+
+.scrollable {
+	overflow: scroll;
+	height: 200px;
+}
