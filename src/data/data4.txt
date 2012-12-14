@@ -1,0 +1,12 @@
+# Optimal tree is (A,B,((C,(D,E)),(F,(G,H)))).
+# There are two non-trivial subtrees. Thus, this is one of the simplest possible trees where tree fusion can be meaningful.
+11 9
+A	00000000000
+B	11000000000
+C	11001100000
+D	11111100000
+E	11111111000
+F	11000000100
+G	11000000110
+H	11000000111
+I	11011100000
