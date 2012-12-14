@@ -15,12 +15,14 @@ def main(args):
 
 		if args.algorithm == 'exhaustive':
 			import exhaustive
-			tree = exhaustive.exhaustive_search(cm)
-			print tree.to_string(cm)
+			trees = exhaustive.exhaustive_search(cm)
+			for tree in trees:
+				print tree.to_string(cm)
 		elif args.algorithm in ('bnb', 'branch-and-bound'):
 			import branchnbound
-			tree = branchnbound.branchnbound_search(cm)
-			print tree.to_string(cm)
+			trees = branchnbound.branchnbound_search(cm)
+			for tree in trees:
+				print tree.to_string(cm)
 		else:
 			import parallel_search
 			comm = parallel_search.communicator(cm, args.time, args.interval)
