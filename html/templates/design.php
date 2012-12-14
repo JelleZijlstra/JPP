@@ -7,7 +7,7 @@
 <h3>Exact algorithms</h3>
 <p>Exhaustive search is implemented by starting with the unique tree containing a single taxon, then recursively generating more trees by adding a taxon at all possible nodes. For example, on the tree</p>
 
-<div class="jstree-stub" data-tree="node(leaf('A', 2), leaf('B', 3), 1)"/>
+<div class="jstree-stub" data-tree="node(leaf('A', 2), leaf('B', 3), 1)"></div>
 
 <p>we can add the taxon C on each of the locations 1, 2, and 3, generating the following three trees:</p>
 
@@ -21,7 +21,7 @@
 	<li>
 		<div class="jstree-stub" data-tree="node(leaf('A'), node(leaf('C'), leaf('B')))"/>
 	</li>
-</ul>
+</ol>
 
 <p>Two major optimizations help keep the performance of exhaustive search reasonable up to around 10 taxa: caching of length calculations (discussed above) and extensive use of generators, so that trees are created and examined one by one without keeping unneeded trees in memory, rather than building up an enormous list of trees and only then examining their length. When I replaced all generators with lists, performance became terrible: for 9 taxa, the program took 16 s and 11 MB of memory to calculate the best tree, but without generators, peak memory usage increased to 2.7 GB and the program ran for 11 minutes before I killed it.</p>
 

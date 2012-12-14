@@ -69,5 +69,6 @@
 .jstree-branch-label {
 	display: inline;
 	font-size: small;
+    margin-left: 0.5em;
 }
 
