@@ -13,6 +13,7 @@ Trees are IMMUTABLE. Even though they can't really be in Python.
 import numpy as np
 import fuser
 import tree_parse
+import itertools
 
 class tree(object):
 	def __init__(self, id=None, children=None):
@@ -109,9 +110,9 @@ class tree(object):
 			return [tree(children=(self, tree(id=taxon)))]
 		else:
 			l, r = self.left, self.right
-			return flatten([[tree(children=(self, tree(id=taxon)))], \
+			return itertools.chain([tree(children=(self, tree(id=taxon)))], \
 				r.all_trees_left(l.trees_adding(taxon)), \
-				l.all_trees_right(r.trees_adding(taxon))])
+				l.all_trees_right(r.trees_adding(taxon)))
 
 	def __eq__(self, rhs):
 		if self.is_terminal != rhs.is_terminal:
@@ -154,17 +155,13 @@ def leaf(id):
 	'''Sugar for tree.tree(id=id)'''
 	return tree(id=id)
 
-def flatten(l):
-	'''From a generator returning generators returning items, create a generator directly returning the items'''
-	return (item for sublist in l for item in sublist)
-
 def all_trees_rec(taxa):
 	'''Return all the trees that can be made out of the set of taxa taxa, recursively. The recursive implementation was necessary because otherwise taxon was not scoped correctly.'''
 	if len(taxa) == 1:
 		return [tree(id=taxa.pop())]
 	else:
 		taxon = taxa.pop()
-		return flatten((t.trees_adding(taxon) for t in all_trees_rec(taxa)))
+		return itertools.chain.from_iterable(t.trees_adding(taxon) for t in all_trees_rec(taxa))
 
 def all_trees(taxa, outgroup):
 	'''Return all trees that can be made from taxa'''
