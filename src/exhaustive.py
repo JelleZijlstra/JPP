@@ -25,11 +25,14 @@ def exhaustive_search(cm):
 		ntrees += 1
 		tree_len = a_tree.length(cm)
 		if best_length == None or tree_len < best_length:
-			best_tree = a_tree
+			best_tree = [a_tree]
 			best_length = tree_len
+		elif tree_len == best_length:
+			best_tree.append(a_tree)
 
 	print "Total trees examined: %d" % ntrees
-	print "Length of best tree: %d" % best_length
+	print "Length of best tree(s): %d" % best_length
+	print "Number of best tree(s): %d" % len(best_tree)
 
 	return best_tree
 

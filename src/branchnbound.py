@@ -54,9 +54,13 @@ def branchnbound_search(cm):
 		real_tree = tree.tree(children=(outgroup_tree, a_tree))
 		tree_len = real_tree.length(cm)
 		if best_length == None or tree_len < best_length:
-			best_tree = real_tree
+			best_tree = [real_tree]
 			best_length = tree_len
+		elif tree_len == best_length:
+			best_tree.append(real_tree)
 
 	print "Total trees examined: %d" % ntrees
+	print "Length of best tree(s): %d" % best_length	
+	print "Number of best tree(s): %d" % len(best_tree)
 
 	return best_tree
