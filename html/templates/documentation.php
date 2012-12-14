@@ -153,4 +153,3 @@ Final best tree length: 11
 
 <h3>JavaScript implementation</h3>
 <p>I re-implemented a small portion of the project in JavaScript. The JavaScript code (in <a href="tree/tree.js">tree.js</a>) implements exhaustive search and a function to display trees dynamically on a web page. It uses Tree and CharMatrix classes to represent the underlying objects. Trees are displayed using "jstree" throughout this website, and <a href="run_mp.php">this page</a> provides an interface for executing exhaustive search in JavaScript.</p>
-
