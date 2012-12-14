@@ -161,12 +161,20 @@ var jstree = (function($) {
 	/*
 	 * Utility constructor functions.
 	 */
-	function leaf(name) {
-		return new Tree({name: name});
+	function leaf(name, label) {
+		var options = {name: name};
+		if(typeof label !== 'undefined') {
+			options.label = label;
+		}
+		return new Tree(options);
 	}
 
-	function node(left, right) {
-		return new Tree({left: left, right: right});
+	function node(left, right, label) {
+		var options = {left: left, right: right};
+		if(typeof label !== 'undefined') {
+			options.label = label;
+		}
+		return new Tree(options);
 	}
 
 	/*
