@@ -100,7 +100,7 @@ class communicator(object):
 
 	def callback(self, tree):
 		'''Communicate with the other processes'''
-		print "Executing callback: " + str(self.is_master)
+		print "Executing callback: " + ("Master" if self.is_master else "Slave")
 		if self.is_master:
 			return self.master(tree)
 		else:
