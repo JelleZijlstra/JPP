@@ -123,7 +123,7 @@ var jstree = (function($) {
 		};
 		this.children = function() {
 			if(terminal) {
-				throw new TypeError("Cannot provide children for terminal node");
+				throw new TreeError("Cannot provide children for terminal node");
 			}
 			return [left, right];
 		};
